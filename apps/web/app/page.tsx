@@ -1,86 +1,44 @@
-const signals = [
-  "Synthetic provenance becomes a luxury marker.",
-  "Small models move from utility to intimacy.",
-  "Interfaces collapse into prompts, rituals, and taste.",
-  "AI labor shifts from replacement to orchestration.",
-  "The archive becomes the next contested frontier.",
-];
-
-const stories = [
-  {
-    title: "The Machine Room Has a Velvet Rope",
-    kicker: "Infrastructure",
-    visualWorld: "nocturne-grid",
-    dek: "How compute scarcity is being styled as cultural capital.",
-  },
-  {
-    title: "When Agents Learn House Style",
-    kicker: "Design",
-    visualWorld: "paper-fold",
-    dek: "Brand systems are becoming living editorial organisms.",
-  },
-  {
-    title: "The New Mythology of the Dataset",
-    kicker: "Culture",
-    visualWorld: "archive-dust",
-    dek: "Every corpus carries a worldview; every worldview wants a curator.",
-  },
-  {
-    title: "Soft Power, Hard Models",
-    kicker: "Policy",
-    visualWorld: "redaction-band",
-    dek: "National AI strategy now reads like a fashion week calendar.",
-  },
-  {
-    title: "Post-Search Memory Palaces",
-    kicker: "Interfaces",
-    visualWorld: "signal-orb",
-    dek: "The web is reorganizing around recall, not retrieval.",
-  },
-  {
-    title: "Couture for the Synthetic Self",
-    kicker: "Identity",
-    visualWorld: "chrome-bloom",
-    dek: "Personal models make taste programmable and reputation portable.",
-  },
-];
+import { frontpageContent } from "../content/frontpage";
 
 export default function Home() {
+  const { masthead, hero, signalRail, stories, essay, canonIndex, footerTicker } = frontpageContent;
+
   return (
     <main className="frontpage">
-      <header className="masthead" aria-label="The Latent Times masthead">
-        <div className="masthead__meta">AI · Technology · Culture · Future</div>
-        <h1>The Latent Times</h1>
-        <p>Understand signals. Shape tomorrow.</p>
+      <header className="masthead" aria-label={`${masthead.title} masthead`}>
+        <div className="masthead__meta">{masthead.meta}</div>
+        <h1>{masthead.title}</h1>
+        <p>{masthead.tagline}</p>
       </header>
 
       <section className="hero" aria-labelledby="hero-title">
         <div className="lead-indicator">
-          <span>Lead Indicator</span>
-          <strong>01 / Machine Culture</strong>
+          <span>{hero.indicatorLabel}</span>
+          <strong>{hero.indicatorValue}</strong>
         </div>
         <article className="hero__story">
-          <p className="eyebrow">Frontpage Briefing · Issue 000</p>
-          <h2 id="hero-title">Artificial intelligence is no longer a sector. It is the weather.</h2>
-          <p className="hero__dek">
-            The Latent Times tracks the ambient forces turning models into media, interfaces into rituals,
-            and technical decisions into cultural gravity.
-          </p>
+          <p className="eyebrow">{hero.eyebrow}</p>
+          <h2 id="hero-title">{hero.title}</h2>
+          <p className="hero__dek">{hero.dek}</p>
         </article>
-        <div className="hero__visual" role="img" aria-label="Abstract monochrome placeholder for latent signal field">
+        <div
+          className="hero__visual"
+          role="img"
+          aria-label="Abstract monochrome placeholder for latent signal field"
+        >
           <div className="visual-frame">
-            <span>Latent Field</span>
+            <span>{hero.visualLabel}</span>
           </div>
         </div>
       </section>
 
       <section className="signal-rail" aria-labelledby="signal-title">
         <div>
-          <p className="eyebrow">Signal Rail</p>
-          <h2 id="signal-title">Five movements below the fold</h2>
+          <p className="eyebrow">{signalRail.eyebrow}</p>
+          <h2 id="signal-title">{signalRail.title}</h2>
         </div>
         <ol>
-          {signals.map((signal, index) => (
+          {signalRail.signals.map((signal, index) => (
             <li key={signal}>
               <span>{String(index + 1).padStart(2, "0")}</span>
               <p>{signal}</p>
@@ -105,37 +63,25 @@ export default function Home() {
       </section>
 
       <section className="essay-strip" aria-labelledby="essay-title">
-        <p className="eyebrow">Essay Strip</p>
-        <h2 id="essay-title">
-          The next newspaper is not a dashboard. It is a discipline for seeing the pattern before it becomes
-          consensus.
-        </h2>
-        <p>
-          Read slowly. Compare signals. Distrust frictionless certainty. The future arrives first as a tonal
-          shift, then as infrastructure.
-        </p>
+        <p className="eyebrow">{essay.eyebrow}</p>
+        <h2 id="essay-title">{essay.title}</h2>
+        <p>{essay.body}</p>
       </section>
 
       <section className="canon-index" aria-label="Canon and index">
-        <article>
-          <p className="eyebrow">Canon</p>
-          <h2>The Prompt Is Dead</h2>
-          <p>From command line to conversation, from conversation to choreography.</p>
-        </article>
-        <article>
-          <p className="eyebrow">Index</p>
-          <h2>Signal Map</h2>
-          <p>A living taxonomy for agents, archives, compute, culture, and power.</p>
-        </article>
+        {canonIndex.map((item) => (
+          <article key={item.title}>
+            <p className="eyebrow">{item.eyebrow}</p>
+            <h2>{item.title}</h2>
+            <p>{item.summary}</p>
+          </article>
+        ))}
       </section>
 
       <footer className="footer-ticker" aria-label="Footer ticker">
-        <span>News</span>
-        <span>Analysis</span>
-        <span>Interviews</span>
-        <span>Reports</span>
-        <span>Signals</span>
-        <span>The Latent Lens</span>
+        {footerTicker.map((item) => (
+          <span key={item}>{item}</span>
+        ))}
       </footer>
 
       <style>{`
