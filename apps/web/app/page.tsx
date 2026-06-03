@@ -17,9 +17,15 @@ export default function Home() {
           <strong>{hero.indicatorValue}</strong>
         </div>
         <article className="hero__story">
-          <p className="eyebrow">{hero.eyebrow}</p>
-          <h2 id="hero-title">{hero.title}</h2>
-          <p className="hero__dek">{hero.dek}</p>
+          <p className="eyebrow">Frontpage Briefing · Issue 000</p>
+          <h2 id="hero-title">
+            Artificial intelligence is no longer a sector. It is the weather.
+          </h2>
+          <p className="hero__dek">
+            The Latent Times tracks the ambient forces turning models into
+            media, interfaces into rituals, and technical decisions into
+            cultural gravity.
+          </p>
         </article>
         <div
           className="hero__visual"
@@ -49,7 +55,10 @@ export default function Home() {
 
       <section className="story-grid" aria-label="Story grid">
         {stories.map((story) => (
-          <article className={`story-card story-card--${story.visualWorld}`} key={story.title}>
+          <article
+            className={`story-card story-card--${story.visualWorld}`}
+            key={story.title}
+          >
             <div className="story-card__visual">
               <span>{story.visualWorld}</span>
             </div>
@@ -63,19 +72,33 @@ export default function Home() {
       </section>
 
       <section className="essay-strip" aria-labelledby="essay-title">
-        <p className="eyebrow">{essay.eyebrow}</p>
-        <h2 id="essay-title">{essay.title}</h2>
-        <p>{essay.body}</p>
+        <p className="eyebrow">Essay Strip</p>
+        <h2 id="essay-title">
+          The next newspaper is not a dashboard. It is a discipline for seeing
+          the pattern before it becomes consensus.
+        </h2>
+        <p>
+          Read slowly. Compare signals. Distrust frictionless certainty. The
+          future arrives first as a tonal shift, then as infrastructure.
+        </p>
       </section>
 
       <section className="canon-index" aria-label="Canon and index">
-        {canonIndex.map((item) => (
-          <article key={item.title}>
-            <p className="eyebrow">{item.eyebrow}</p>
-            <h2>{item.title}</h2>
-            <p>{item.summary}</p>
-          </article>
-        ))}
+        <article>
+          <p className="eyebrow">Canon</p>
+          <h2>The Prompt Is Dead</h2>
+          <p>
+            From command line to conversation, from conversation to
+            choreography.
+          </p>
+        </article>
+        <article>
+          <p className="eyebrow">Index</p>
+          <h2>Signal Map</h2>
+          <p>
+            A living taxonomy for agents, archives, compute, culture, and power.
+          </p>
+        </article>
       </section>
 
       <footer className="footer-ticker" aria-label="Footer ticker">

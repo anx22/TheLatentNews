@@ -2,82 +2,71 @@
 
 A high-fashion newspaper for AI as culture, power and myth.
 
-## Current system snapshot
+## Current prototype status
 
-The repository currently contains a single runnable web application in `apps/web`. It is a Next.js App Router prototype that renders a static editorial frontpage under the product masthead **The Latent Times**. The page already establishes the intended visual and editorial direction, but it does not yet include a CMS, article routes, API layer, test suite, CI workflow, or production publishing process.
+The repository currently contains a Next.js web prototype in `apps/web`. The app renders a static editorial front page for **The Latent Times / The Latent News** with a masthead, hero briefing, signal rail, story grid, essay strip, canon/index block, and footer ticker.
 
-For the detailed inventory, risks, next implementation phases, and parallel workstreams, see [`docs/system-status-and-implementation-compass.md`](docs/system-status-and-implementation-compass.md).
+The project is still pre-MVP. The immediate goal is to consolidate all Codex-generated work on `main`, keep changes committed automatically, and make every future iteration reproducible through documented quality gates.
 
 ## Repository layout
 
 ```text
 .
-├── README.md
-├── docs/
-│   └── system-status-and-implementation-compass.md
-└── apps/
-    └── web/
-        ├── app/
-        │   ├── layout.tsx
-        │   └── page.tsx
-        ├── content/
-        │   └── frontpage.ts
-        ├── eslint.config.mjs
-        ├── .prettierrc.json
-        ├── .prettierignore
-        ├── package.json
-        ├── package-lock.json
-        └── tsconfig.json
+├── apps/web                 # Next.js web prototype
+│   ├── app                  # App Router pages/layout
+│   ├── scripts              # Local automation scripts
+│   ├── eslint.config.mjs    # ESLint flat config
+│   ├── package.json         # Web app scripts/dependencies
+│   └── tsconfig.json        # TypeScript config
+├── docs
+│   ├── codex-workflow.md    # How Codex work is consolidated and committed
+│   ├── quality.md           # Required local/CI quality gates
+│   ├── roadmap.md           # Step-by-step product build plan
+│   └── temporal-memory.md   # Temporal memory concept for the product
+└── .github/workflows
+    └── web-ci.yml           # Automated CI checks for the web app
 ```
 
-## Web application
+## Working branch policy
 
-- **Framework:** Next.js App Router
-- **Package:** `@the-latent-news/web`
-- **Primary route:** `/`
-- **Current rendering mode:** static prerendered frontpage
-- **Primary files:**
-  - `apps/web/app/layout.tsx` for global metadata and document structure.
-  - `apps/web/app/page.tsx` for the current frontpage composition and inline styles.
-  - `apps/web/content/frontpage.ts` for typed frontpage content.
+- `main` is the canonical working branch for this prototype.
+- Codex-generated changes should be committed directly on the active branch before a PR is prepared.
+- If feature branches exist later, merge them into `main` only after the quality gates pass.
+- Keep the working tree clean after every completed Codex task.
 
-## Local development
-
-From the web app directory:
+## Local setup
 
 ```bash
 cd apps/web
-npm install
+npm ci
 npm run dev
 ```
 
-Then open the local Next.js development URL printed by the command.
+The development server uses the default Next.js behavior. Open the URL printed by `npm run dev`.
 
-## Checks
+## Quality gates
+
+Run these checks before every merge or PR:
 
 ```bash
 cd apps/web
-npm run build
+npm run typecheck
 npm run lint
-npm run format:check
+npm run format
+npm run a11y:smoke
+npm run build
 ```
 
-Known status as of 2026-06-02:
+The same checks are mirrored in `.github/workflows/web-ci.yml`.
 
-- `npm run build` succeeds and statically prerenders the home route.
-- `npm run lint` now uses the ESLint CLI with `eslint-config-next` and runs non-interactively.
-- `npm run format:check` uses Prettier to verify formatting without modifying files.
+## Current product direction
 
-## Implementation compass
+The Latent News should become an editorial system for AI culture, power, infrastructure, interfaces, datasets, and future signals. The site should evolve from a static front page into a full publishing product with:
 
-The next phases are:
+1. Structured article and signal models.
+2. A temporal memory that tracks how AI narratives change over time.
+3. Editorial routes for news, analysis, interviews, reports, signals, archive, and The Latent Lens.
+4. Reusable components and a documented design system.
+5. Automated CI, quality gates, and predictable Codex handoff behavior.
 
-1. Continue stabilizing tooling: stricter TypeScript and CI are still outstanding; ESLint CLI and Prettier are now in place.
-2. Modularize the frontpage into reusable components.
-3. Extend the typed content files into a fuller editorial domain model.
-4. Define the editorial content model for stories, signals, issues, authors, tags, and visual worlds.
-5. Add story detail routes and metadata generation.
-6. Add accessibility, responsive, component, and smoke tests.
-7. Establish deployment, preview, analytics/privacy, RSS/sitemap, and editorial publishing workflows.
-
-See the full compass for acceptance criteria and parallelizable tracks.
+See `docs/roadmap.md` and `docs/temporal-memory.md` for the next implementation tasks.
